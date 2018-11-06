@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db, store } from "../firebase/firebase";
-import StorageImage from "./storageImage";
+import Image from "./image";
 
 const objToArr = obj =>
   Object.keys(obj).map(key => ({
@@ -23,7 +23,7 @@ const Images = ({ user, file }) => {
 
   return (
     <>
-      <h1>Images</h1>
+      <h1 className="title is-1">Images</h1>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -52,24 +52,26 @@ const Images = ({ user, file }) => {
             });
         }}
       >
-        <label>
-          Upload image
+        <div className="field">
+          <label className="label">Upload image </label>
+
           <input
+            className="input"
             id="fileInput"
             onChange={e => setUpload(e.target.files[0])}
             type="file"
           />
-        </label>
-        <input type="submit" value="Upload Image" />
+        </div>
+        <input
+          className="button is-success"
+          type="submit"
+          value="Upload Image"
+        />
       </form>
-      <hr />
-      <h2>Images</h2>
 
       {objToArr(images).map(i => (
         <div key={i.val.filename}>
-          <StorageImage user={user} file={i.val.filename} />
-          <p>{i.val.filename}</p>
-          <p>Likes: {i.val.likes}</p>
+          <Image user={user} file={i.val.filename} />
         </div>
       ))}
     </>
