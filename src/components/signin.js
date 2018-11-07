@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "../firebase/firebase";
+import { auth, githubAuthProvider } from "../firebase/firebase";
 
 const SignIn = () => {
   const [email, setEmail] = useState("testuser@test.te");
@@ -62,6 +62,17 @@ const SignIn = () => {
       </form>
       {err && <p className="has-text-danger">{err}</p>}
       <p />
+
+      <div className="control">
+        <button
+          className="button is-large"
+          onClick={() => {
+            auth.signInWithRedirect(githubAuthProvider);
+          }}
+        >
+          Sign in with gitlab
+        </button>
+      </div>
     </div>
   );
 };
