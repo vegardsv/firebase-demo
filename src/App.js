@@ -12,6 +12,8 @@ const App = () => {
   useEffect(() => {
     console.log("using effect");
     auth.onAuthStateChanged(authUser => {
+      console.log(authUser);
+
       setUser(authUser);
     });
   }, auth);

@@ -15,9 +15,14 @@ const Forgot = () => {
             .catch(({ message }) => setErr(message));
         }}
       >
+        <p>
+          Enter the email address you used when you joined and we’ll send you
+          instructions to reset your password.
+        </p>
+
         <div className="field">
           <label className="label" htmlFor="forgot_pass_email">
-            Email-adress
+            Email Address
           </label>
           <div className="control">
             <input
@@ -30,9 +35,19 @@ const Forgot = () => {
             />
           </div>
         </div>
-        <input className="button" type="submit" value="Reset password" />
+
+        {err && (
+          <div className="field">
+            <p className="has-text-danger">{err}</p>
+          </div>
+        )}
+
+        <input
+          className="button is-large is-fullwidth is-primary"
+          type="submit"
+          value="Reset password"
+        />
       </form>
-      {err && <p className="has-text-danger">{err}</p>}
     </div>
   );
 };

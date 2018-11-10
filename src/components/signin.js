@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth, githubAuthProvider } from "../firebase/firebase";
+import github from "../gfx/github.svg";
 
 const SignIn = () => {
   const [email, setEmail] = useState("testuser@test.te");
@@ -9,10 +10,23 @@ const SignIn = () => {
 
   return (
     <div className="column is-5 is-offset-4 has-background-white">
-      <h1 className="title is-1">Sign in</h1>
-      <p>
-        Or <Link to="/signup">sign up for an account</Link>
-      </p>
+      <h1 className="title is-1 has-text-centered">Sign in</h1>
+      <div className="control">
+        <button
+          className="button is-large is-fullwidth"
+          onClick={() => {
+            auth.signInWithRedirect(githubAuthProvider);
+          }}
+        >
+          <img
+            style={{ marginRight: ".5em" }}
+            src={github}
+            width="24px"
+            height="24px"
+          />
+          Sign in with GitHub
+        </button>
+      </div>
 
       <form
         onSubmit={e => {
@@ -25,6 +39,8 @@ const SignIn = () => {
             .catch(({ message }) => setErr(message));
         }}
       >
+        <hr />
+
         <div className="field">
           <label className="label" htmlFor="sign_in_username">
             Username
@@ -42,8 +58,12 @@ const SignIn = () => {
         </div>
         <div className="field">
           <label className="label" htmlFor="sign_in_password">
-            Password
+            Password{" "}
+            <Link className="has-text-grey-dark" to="forgot_password">
+              Forgot?
+            </Link>
           </label>
+
           <div className="control">
             <input
               className="input"
@@ -55,24 +75,26 @@ const SignIn = () => {
             />
           </div>
         </div>
+
+        {err && (
+          <div className="field">
+            <p className="has-text-danger">{err}</p>
+          </div>
+        )}
+
         <div className="buttons">
-          <input className="button" type="submit" value="Sign in" />
-          <Link to="forgot_password">Forgot password</Link>
+          <input
+            className="button is-large is-fullwidth is-primary"
+            type="submit"
+            value="Sign in"
+          />
         </div>
       </form>
-      {err && <p className="has-text-danger">{err}</p>}
-      <p />
 
-      <div className="control">
-        <button
-          className="button is-large"
-          onClick={() => {
-            auth.signInWithRedirect(githubAuthProvider);
-          }}
-        >
-          Sign in with gitlab
-        </button>
-      </div>
+      <hr />
+      <p className="has-text-centered">
+        Not a member? <Link to="/signup">Sign up now</Link>
+      </p>
     </div>
   );
 };

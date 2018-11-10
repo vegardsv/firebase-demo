@@ -10,9 +10,6 @@ const SignUp = () => {
   return (
     <div className="column is-5 is-offset-4 has-background-white">
       <h1 className="title is-1">Sign up</h1>
-      <p>
-        Or <Link to="/">sign in if you already is registred</Link>
-      </p>
 
       <form
         onSubmit={e => {
@@ -27,7 +24,7 @@ const SignUp = () => {
       >
         <div className="field">
           <label className="label" htmlFor="signup_email">
-            Email adress
+            Email address
           </label>
 
           <div className="control">
@@ -58,9 +55,25 @@ const SignUp = () => {
             />
           </div>
         </div>
-        <input className="button" type="submit" value="Create account" />
+
+        {err && (
+          <div className="field">
+            <p className="has-text-danger">{err}</p>
+          </div>
+        )}
+
+        <input
+          className="button is-large is-fullwidth is-primary"
+          type="submit"
+          value="Create account"
+        />
       </form>
-      {err && <p className="has-text-danger">{err}</p>}
+
+      <hr />
+
+      <p className="has-text-centered">
+        Or <Link to="/">sign in</Link> if you already is registred
+      </p>
     </div>
   );
 };

@@ -9,7 +9,6 @@ if (!firebase.apps.length) {
 }
 
 const githubAuthProvider = new firebase.auth.GithubAuthProvider();
-
 const auth = firebase.auth();
 const db = firebase.database();
 const store = firebase.storage();

@@ -4,14 +4,15 @@ import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Profile from "./profile";
 import Images from "./images";
+import Welcome from "./welcome.js";
 
 const Main = ({ user, setUser }) => {
   return (
     <>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://github.com/">
-            Firebase/hooks
+          <a className="navbar-item is-size-4 has-text-black" href="/">
+            Firebase demo
           </a>
         </div>
 
@@ -20,19 +21,15 @@ const Main = ({ user, setUser }) => {
             <Link className="navbar-item" to="profile">
               Profile
             </Link>
-            <Link
-              activeClassName="selected"
-              className="navbar-item"
-              to="/images"
-            >
+            <Link className="navbar-item" to="/images">
               Images
             </Link>
           </div>
           <div className="navbar-end">
             <div className="buttons">
-              <button className="button is-text" onClick={() => auth.signOut()}>
-                Sign out
-              </button>
+              <Link to="/" onClick={() => auth.signOut()}>
+                Log out
+              </Link>
             </div>
           </div>
         </div>
@@ -40,22 +37,7 @@ const Main = ({ user, setUser }) => {
 
       <section className="section">
         <div className="column is-9 is-offset-2 has-background-white">
-          <Route
-            exact
-            path="/"
-            component={() => (
-              <div>
-                <h1 className="title is-1">Welcome</h1>
-                <p>
-                  Leverage agile frameworks to provide a robust synopsis for
-                  high level overviews. Iterative approaches to corporate
-                  strategy foster collaborative thinking to further the overall
-                  value proposition. Organically grow the holistic world view of
-                  disruptive innovation via workplace diversity and empowerment.
-                </p>
-              </div>
-            )}
-          />
+          <Route exact path="/" component={Welcome} />
           <Route
             exact
             path="/profile"
